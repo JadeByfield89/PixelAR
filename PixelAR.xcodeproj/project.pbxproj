@@ -56,15 +56,23 @@
 		CC8E81BB1F75F30900A697A0 /* PixelAR */ = {
 			isa = PBXGroup;
 			children = (
+				CC8E81D01F75F32700A697A0 /* Resources */,
 				CC8E81BC1F75F30900A697A0 /* AppDelegate.swift */,
 				CC8E81BE1F75F30A00A697A0 /* art.scnassets */,
 				CC8E81C01F75F30A00A697A0 /* ViewController.swift */,
 				CC8E81C21F75F30A00A697A0 /* Main.storyboard */,
-				CC8E81C51F75F30A00A697A0 /* Assets.xcassets */,
 				CC8E81C71F75F30A00A697A0 /* LaunchScreen.storyboard */,
 				CC8E81CA1F75F30A00A697A0 /* Info.plist */,
 			);
 			path = PixelAR;
+			sourceTree = "<group>";
+		};
+		CC8E81D01F75F32700A697A0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CC8E81C51F75F30A00A697A0 /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

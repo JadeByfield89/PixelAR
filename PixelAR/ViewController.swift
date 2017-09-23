@@ -14,20 +14,94 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
     
+    var scene: SCNScene!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Set the view's delegate
         sceneView.delegate = self
         
+        
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
+        sceneView.autoenablesDefaultLighting = false
+        sceneView.session.configuration?.isLightEstimationEnabled = true
         
-        // Create a new scene
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
+        let photoNode = SCNNode()
+        photoNode.position = SCNVector3(x: 0.0, y: 0.0, z: -0.03)
+        photoNode.geometry = SCNBox(width: 0.005, height: 0.006, length: 0.001, chamferRadius: 0.0)
+        photoNode.castsShadow = true
         
-        // Set the scene to the view
-        sceneView.scene = scene
+        let coverMaterial = SCNMaterial()
+        coverMaterial.diffuse.contents = UIImage(named: "skyline")
+        
+        let sideMaterial = SCNMaterial()
+        sideMaterial.diffuse.contents = UIColor.white
+        
+        let materials = [coverMaterial, sideMaterial, sideMaterial, sideMaterial, sideMaterial, sideMaterial]
+        photoNode.geometry?.materials = materials
+        photoNode.physicsBody = SCNPhysicsBody.static()
+        
+        
+        setupCamera()
+        setupLighting()
+        
+        scene = sceneView.scene
+        
+      
+        scene.rootNode.addChildNode(photoNode)
+        
+        
+    }
+    
+    func setupLighting(){
+        
+        // Add spot light
+        let spotLight = SCNLight()
+        spotLight.type = SCNLight.LightType.spot
+        spotLight.spotInnerAngle = 45
+        spotLight.spotOuterAngle = 45
+        
+        let spotlightNode = SCNNode()
+        spotlightNode.light = spotLight
+        spotlightNode.position = SCNVector3(x: 0.0, y: 0.0, z: -0.03)
+        
+        // By default the stop light points directly down the negative
+        // z-axis, we want to shine it down so rotate 90deg around the
+        // x-axis to point it down
+        spotlightNode.eulerAngles = SCNVector3Make(Float(-Double.pi / 2), 0, 0)
+        
+        
+        // Add ambient light
+        let ambientLight = SCNLight()
+        ambientLight.type = SCNLight.LightType.ambient
+        ambientLight.spotInnerAngle = 45
+        ambientLight.spotOuterAngle = 45
+        
+        let ambientlightNode = SCNNode()
+        ambientlightNode.light = ambientLight
+        ambientlightNode.position = SCNVector3(x: 0.0, y: 0.0, z: -0.03)
+        
+        let scene = sceneView.scene
+        scene.rootNode.addChildNode(ambientlightNode)
+        scene.rootNode.addChildNode(spotlightNode)
+        
+    }
+    
+    func setupCamera() {
+        guard let camera = sceneView.pointOfView?.camera else {
+            fatalError("Expected a valid `pointOfView` from the scene.")
+        }
+        
+        /*
+         Enable HDR camera settings for the most realistic appearance
+         with environmental lighting and physically based materials.
+         */
+        camera.wantsHDR = true
+        camera.exposureOffset = -1
+        camera.minimumExposure = -1
+        camera.maximumExposure = 3
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,14 +128,25 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
     // MARK: - ARSCNViewDelegate
     
-/*
+
     // Override to create and configure nodes for anchors added to the view's session.
-    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
+    /*func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         let node = SCNNode()
-     
         return node
+    }*/
+    
+    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+        print("renderer()")
+        
+        let lightEstimate = self.sceneView.session.currentFrame?.lightEstimate!
+        print("Light estimate -> " + lightEstimate.debugDescription)
+        
+        if(lightEstimate == nil){
+            return
+        }
+        
     }
-*/
+
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
