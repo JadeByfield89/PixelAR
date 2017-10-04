@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC3482581F76D731007F0655 /* PictureFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3482571F76D731007F0655 /* PictureFrame.swift */; };
 		CC8E81BD1F75F30900A697A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8E81BC1F75F30900A697A0 /* AppDelegate.swift */; };
 		CC8E81BF1F75F30A00A697A0 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = CC8E81BE1F75F30A00A697A0 /* art.scnassets */; };
 		CC8E81C11F75F30A00A697A0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8E81C01F75F30A00A697A0 /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CC3482571F76D731007F0655 /* PictureFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureFrame.swift; sourceTree = "<group>"; };
 		CC8E81B91F75F30900A697A0 /* PixelAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PixelAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC8E81BC1F75F30900A697A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC8E81BE1F75F30A00A697A0 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -58,11 +60,11 @@
 			children = (
 				CC8E81D01F75F32700A697A0 /* Resources */,
 				CC8E81BC1F75F30900A697A0 /* AppDelegate.swift */,
-				CC8E81BE1F75F30A00A697A0 /* art.scnassets */,
 				CC8E81C01F75F30A00A697A0 /* ViewController.swift */,
 				CC8E81C21F75F30A00A697A0 /* Main.storyboard */,
 				CC8E81C71F75F30A00A697A0 /* LaunchScreen.storyboard */,
 				CC8E81CA1F75F30A00A697A0 /* Info.plist */,
+				CC3482571F76D731007F0655 /* PictureFrame.swift */,
 			);
 			path = PixelAR;
 			sourceTree = "<group>";
@@ -70,6 +72,7 @@
 		CC8E81D01F75F32700A697A0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CC8E81BE1F75F30A00A697A0 /* art.scnassets */,
 				CC8E81C51F75F30A00A697A0 /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -150,6 +153,7 @@
 			files = (
 				CC8E81C11F75F30A00A697A0 /* ViewController.swift in Sources */,
 				CC8E81BD1F75F30900A697A0 /* AppDelegate.swift in Sources */,
+				CC3482581F76D731007F0655 /* PictureFrame.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
